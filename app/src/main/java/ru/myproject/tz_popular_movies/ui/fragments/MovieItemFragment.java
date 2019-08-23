@@ -1,7 +1,6 @@
 package ru.myproject.tz_popular_movies.ui.fragments;
 
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -31,12 +30,9 @@ public class MovieItemFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_movie_description_item, container,
                 false);
 
-        if (getArguments() != null) {
 
-            System.out.println();
-
-            movie = getArguments().getParcelable("my_movie");
-        }
+        assert getArguments() != null;
+        movie = getArguments().getParcelable("my_movie");
 
         title=v.findViewById(R.id.title);
         overview=v.findViewById(R.id.text_description_movie);

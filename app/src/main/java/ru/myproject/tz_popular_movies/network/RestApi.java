@@ -14,17 +14,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RestApi {
 
 
-    public  static String BASE_URL ="http://api.themoviedb.org";
+    private static String BASE_URL ="http://api.themoviedb.org";
 
     private static Retrofit sRetrofit=null;
 
-
-
     public  static  void init (){
         OkHttpClient.Builder okHttpClient =new OkHttpClient.Builder();
-
-
-
         HttpLoggingInterceptor interceptor =new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         okHttpClient.addInterceptor(interceptor);

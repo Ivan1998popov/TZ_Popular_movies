@@ -1,7 +1,6 @@
 package ru.myproject.tz_popular_movies.model;
 
 import java.util.ArrayList;
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

@@ -3,39 +3,31 @@ package ru.myproject.tz_popular_movies.ui;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
-
 import ru.myproject.tz_popular_movies.R;
-import ru.myproject.tz_popular_movies.model.Main;
 import ru.myproject.tz_popular_movies.model.Movie;
 import ru.myproject.tz_popular_movies.ui.activities.MainActivity;
 import ru.myproject.tz_popular_movies.ui.fragments.MovieItemFragment;
-import ru.myproject.tz_popular_movies.ui.fragments.MovieListFragment;
 import ru.myproject.tz_popular_movies.ui.presenter.MovieListPresenter;
 
 
 public class AdapterMovieList extends RecyclerView.Adapter<AdapterMovieList.MyViewHolder> {
 
     private ArrayList<Movie> items;
-    private MovieListFragment fragment;
-    MovieListPresenter presenter;
 
-    public AdapterMovieList(MovieListFragment fragment, MovieListPresenter presenter) {
+    private MovieListPresenter presenter;
 
-        this.fragment = fragment;
+    public AdapterMovieList( MovieListPresenter presenter) {
+
         items = new ArrayList<>();
         this.presenter = presenter;
     }
-
 
     public void loadItems(ArrayList<Movie> items) {
         this.items = items;
@@ -64,31 +56,24 @@ public class AdapterMovieList extends RecyclerView.Adapter<AdapterMovieList.MyVi
                 viewGroup, false);
 
         final MyViewHolder myViewHolder = new MyViewHolder(view);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int position = myViewHolder.getAdapterPosition();
-                if (position != RecyclerView.NO_POSITION) {
-                    MainActivity activity = (MainActivity) v.getContext();
+        view.setOnClickListener(v -> {
+            int position = myViewHolder.getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION) {
+                MainActivity activity = (MainActivity) v.getContext();
 
-                    Movie movie=items.get(position);
-                    System.out.println(movie.getTitle());
-
-                    MovieItemFragment movieItemFragment = MovieItemFragment.newInstance(movie);
-                    activity.getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragment_container, movieItemFragment)
-                            .addToBackStack(null)
-                            .commit();
+                MovieItemFragment movieItemFragment = MovieItemFragment.newInstance(items.get(position));
+                activity.getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, movieItemFragment)
+                        .addToBackStack(null)
+                        .commit();
 
 
-                }
             }
         });
 
         return myViewHolder;
     }
-
 
     @Override
     public void onBindViewHolder(@NonNull AdapterMovieList.MyViewHolder holder, int i) {

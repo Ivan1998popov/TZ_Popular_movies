@@ -1,8 +1,5 @@
 package ru.myproject.tz_popular_movies.network.service;
 
-
-import java.util.ArrayList;
-
 import io.reactivex.Single;
 import retrofit2.Response;
 import retrofit2.http.GET;
