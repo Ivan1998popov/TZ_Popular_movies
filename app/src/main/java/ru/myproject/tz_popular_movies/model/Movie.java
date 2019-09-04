@@ -2,6 +2,7 @@ package ru.myproject.tz_popular_movies.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.List;
 
 import com.google.gson.annotations.Expose;

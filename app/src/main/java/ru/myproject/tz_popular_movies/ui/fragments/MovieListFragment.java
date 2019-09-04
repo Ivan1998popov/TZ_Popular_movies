@@ -4,9 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -47,7 +45,7 @@ public class MovieListFragment extends Fragment implements MovieListPresenter.Vi
         super.onViewCreated(view, savedInstanceState);
 
         mRecyclerView = view.findViewById(R.id.movie_list_items);
-        adapter = new AdapterMovieList( presenter);
+        adapter = new AdapterMovieList(getContext());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(adapter);
     }

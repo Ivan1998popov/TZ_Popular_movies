@@ -1,10 +1,11 @@
 package ru.myproject.tz_popular_movies.model;
 
 import java.util.ArrayList;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Main {
+public class ListMovies {
 
     @SerializedName("page")
     @Expose
@@ -20,10 +21,10 @@ public class Main {
     private ArrayList<Movie> movies = null;
 
 
-    public Main() {
+    public ListMovies() {
     }
 
-    public Main(int page, int totalResults, int totalPages, ArrayList<Movie> movies) {
+    public ListMovies(int page, int totalResults, int totalPages, ArrayList<Movie> movies) {
         super();
         this.page = page;
         this.totalResults = totalResults;

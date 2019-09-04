@@ -1,15 +1,13 @@
 package ru.myproject.tz_popular_movies.ui.fragments;
 
 import android.util.Log;
-import android.view.View;
 
-import java.util.ArrayList;
 
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import ru.myproject.tz_popular_movies.model.Main;
+import ru.myproject.tz_popular_movies.model.ListMovies;
 import ru.myproject.tz_popular_movies.network.RestApi;
 import ru.myproject.tz_popular_movies.network.SingleResponseFlatMap;
 import ru.myproject.tz_popular_movies.network.service.MovieService;
@@ -21,9 +19,9 @@ class MovieListPresenterImpl implements MovieListPresenter {
     private View view;
     private MovieService mMovieService;
 
-    protected MovieListPresenterImpl(MovieListPresenter.View view){
-        this.view =view;
-        mMovieService= RestApi.createService(MovieService.class);
+    protected MovieListPresenterImpl(MovieListPresenter.View view) {
+        this.view = view;
+        mMovieService = RestApi.createService(MovieService.class);
     }
 
     @Override
@@ -33,13 +31,16 @@ class MovieListPresenterImpl implements MovieListPresenter {
                 .subscribeOn(Schedulers.io())
                 .flatMap(new SingleResponseFlatMap<>())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<Main>() {
+                .subscribe(new SingleObserver<ListMovies>() {
                     @Override
-                    public void onSubscribe(Disposable d) { }
+                    public void onSubscribe(Disposable d) {
+                    }
+
                     @Override
-                    public void onSuccess(Main movies) {
+                    public void onSuccess(ListMovies movies) {
                         view.addLoadedItems(movies.getMovies());
                     }
+
                     @Override
                     public void onError(Throwable error) {
                         Log.i("MyError", error.getMessage());

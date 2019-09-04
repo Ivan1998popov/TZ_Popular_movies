@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">TZ_Popular_movies</string>
+
+
+    <string name="name_film">Название фильма</string>
+    <string name="key_api">http://api.themoviedb.org</string>
+    <string name="key_api_image">https://image.tmdb.org/t/p/w500</string>
+
 </resources>

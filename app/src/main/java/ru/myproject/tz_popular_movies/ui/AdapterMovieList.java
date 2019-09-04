@@ -1,6 +1,7 @@
 package ru.myproject.tz_popular_movies.ui;
 
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,25 +9,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
+
 import ru.myproject.tz_popular_movies.R;
 import ru.myproject.tz_popular_movies.model.Movie;
 import ru.myproject.tz_popular_movies.ui.activities.MainActivity;
 import ru.myproject.tz_popular_movies.ui.fragments.MovieItemFragment;
-import ru.myproject.tz_popular_movies.ui.presenter.MovieListPresenter;
 
 
 public class AdapterMovieList extends RecyclerView.Adapter<AdapterMovieList.MyViewHolder> {
 
     private ArrayList<Movie> items;
+    private Context context;
 
-    private MovieListPresenter presenter;
-
-    public AdapterMovieList( MovieListPresenter presenter) {
+    public AdapterMovieList(Context context) {
 
         items = new ArrayList<>();
-        this.presenter = presenter;
+        this.context = context;
     }
 
     public void loadItems(ArrayList<Movie> items) {
@@ -79,7 +81,7 @@ public class AdapterMovieList extends RecyclerView.Adapter<AdapterMovieList.MyVi
     public void onBindViewHolder(@NonNull AdapterMovieList.MyViewHolder holder, int i) {
         holder.title.setText(items.get(i).getTitle());
         Picasso.with(holder.itemView.getContext())
-                .load("https://image.tmdb.org/t/p/w500" + items.get(i).getPosterPath())
+                .load(context.getResources().getString(R.string.key_api_image) + items.get(i).getPosterPath())
                 .into(holder.image);
     }
 

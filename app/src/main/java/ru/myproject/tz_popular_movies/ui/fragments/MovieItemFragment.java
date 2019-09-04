@@ -22,24 +22,30 @@ public class MovieItemFragment extends Fragment {
     private TextView overview;
     private ImageView image;
 
+    private static final String MY_MOVIE = "my_movie";
+
+
+    public static MovieItemFragment newInstance(Movie movie) {
+        MovieItemFragment fragment = new MovieItemFragment();
+        Bundle args = new Bundle();
+        args.putParcelable(MY_MOVIE, movie);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
         View v = inflater.inflate(R.layout.fragment_movie_description_item, container,
                 false);
-
-
         assert getArguments() != null;
-        movie = getArguments().getParcelable("my_movie");
-
-        title=v.findViewById(R.id.title);
-        overview=v.findViewById(R.id.text_description_movie);
-        image=v.findViewById(R.id.image_poster_movie);
-
+        movie = getArguments().getParcelable(MY_MOVIE);
+        title = v.findViewById(R.id.title);
+        overview = v.findViewById(R.id.text_description_movie);
+        image = v.findViewById(R.id.image_poster_movie);
         setData();
-
         return v;
     }
 
@@ -48,15 +54,10 @@ public class MovieItemFragment extends Fragment {
         overview.setText(movie.getOverview());
 
         Picasso.with(getContext())
-                .load("https://image.tmdb.org/t/p/w500"+movie.getPosterPath())
+                .load(getActivity().getResources().getString(R.string.key_api_image)
+                        + movie.getPosterPath())
                 .into(image);
     }
 
-    public static MovieItemFragment newInstance(Movie movie) {
-        MovieItemFragment fragment = new MovieItemFragment();
-        Bundle args = new Bundle();
-        args.putParcelable("my_movie",  movie);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 }
